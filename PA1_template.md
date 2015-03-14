@@ -33,19 +33,12 @@ steps_per_day <- aggregate( steps ~ date, data=data, FUN=sum)
 
 ```r
 library(ggplot2)
-```
-
-```
-## Find out what's changed in ggplot2 with
-## news(Version == "0.9.3.1", package = "ggplot2")
-```
-
-```r
 histogram <- function(x) {
     steps_per_day <- aggregate( steps ~ date, data=x, FUN=sum)
     p <- ggplot(steps_per_day, aes(steps))
     p <- p + geom_histogram(binwidth=1000,fill="black",alpha=0.5)
-    p <- p + labs(y="Frequency", x="Steps taken each day", title="Total number of steps taken each day")
+    p <- p + labs(y="Frequency", x="Steps taken each day", 
+                  title="Total number of steps taken each day")
     print(p)
     steps_per_day
 }
@@ -87,7 +80,8 @@ line_plot <- function(x) {
     p <- ggplot(avg_steps, aes(timeofday, steps))
     p <- p + geom_line(color="black")
     p <- p + scale_x_datetime(labels=date_format("%H:%M %p"))
-    p <- p + labs(x="5-minute interval", y="Average number of steps taken", title="Avg # of steps taken / 5-min interval, averaged across all days")
+    p <- p + labs(x="5-minute interval", y="Average number of steps taken", 
+                  title="Avg # of steps taken / 5-min interval, averaged across all days")
     print(p)    
     avg_steps   
 }
@@ -202,7 +196,8 @@ library(scales)
 panel <- ggplot(steps_weekend, aes(x=timeofday, y=steps))
 panel <- panel + geom_line(col= "black") + facet_grid(weekend~.)
 panel <- panel + scale_x_datetime(labels=date_format("%H:%M %p"))
-panel <- panel + labs(x="5-minute interval", y="Average number of steps taken", title="Avg # of steps taken / 5-min interval, averaged across all weekday/weekend")
+panel <- panel + labs(x="5-minute interval", y="Average number of steps taken",
+                      title="Avg # of steps taken / 5-min interval, averaged across all weekday/weekend")
 panel
 ```
 

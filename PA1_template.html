@@ -234,17 +234,12 @@ activity &lt;- read.csv(&quot;~/Desktop/activity.csv&quot;)
 </ol>
 
 <pre><code class="r">library(ggplot2)
-</code></pre>
-
-<pre><code>## Find out what&#39;s changed in ggplot2 with
-## news(Version == &quot;0.9.3.1&quot;, package = &quot;ggplot2&quot;)
-</code></pre>
-
-<pre><code class="r">histogram &lt;- function(x) {
+histogram &lt;- function(x) {
     steps_per_day &lt;- aggregate( steps ~ date, data=x, FUN=sum)
     p &lt;- ggplot(steps_per_day, aes(steps))
     p &lt;- p + geom_histogram(binwidth=1000,fill=&quot;black&quot;,alpha=0.5)
-    p &lt;- p + labs(y=&quot;Frequency&quot;, x=&quot;Steps taken each day&quot;, title=&quot;Total number of steps taken each day&quot;)
+    p &lt;- p + labs(y=&quot;Frequency&quot;, x=&quot;Steps taken each day&quot;, 
+                  title=&quot;Total number of steps taken each day&quot;)
     print(p)
     steps_per_day
 }
@@ -285,7 +280,8 @@ line_plot &lt;- function(x) {
     p &lt;- ggplot(avg_steps, aes(timeofday, steps))
     p &lt;- p + geom_line(color=&quot;black&quot;)
     p &lt;- p + scale_x_datetime(labels=date_format(&quot;%H:%M %p&quot;))
-    p &lt;- p + labs(x=&quot;5-minute interval&quot;, y=&quot;Average number of steps taken&quot;, title=&quot;Avg # of steps taken / 5-min interval, averaged across all days&quot;)
+    p &lt;- p + labs(x=&quot;5-minute interval&quot;, y=&quot;Average number of steps taken&quot;, 
+                  title=&quot;Avg # of steps taken / 5-min interval, averaged across all days&quot;)
     print(p)    
     avg_steps   
 }
@@ -394,7 +390,8 @@ library(scales)
 panel &lt;- ggplot(steps_weekend, aes(x=timeofday, y=steps))
 panel &lt;- panel + geom_line(col= &quot;black&quot;) + facet_grid(weekend~.)
 panel &lt;- panel + scale_x_datetime(labels=date_format(&quot;%H:%M %p&quot;))
-panel &lt;- panel + labs(x=&quot;5-minute interval&quot;, y=&quot;Average number of steps taken&quot;, title=&quot;Avg # of steps taken / 5-min interval, averaged across all weekday/weekend&quot;)
+panel &lt;- panel + labs(x=&quot;5-minute interval&quot;, y=&quot;Average number of steps taken&quot;,
+                      title=&quot;Avg # of steps taken / 5-min interval, averaged across all weekday/weekend&quot;)
 panel
 </code></pre>
 
